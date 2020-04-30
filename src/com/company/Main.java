@@ -3,25 +3,20 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-        BankAccount accountAmount = new BankAccount();
-        accountAmount.deposit(10000);
-
-
+        Bank demirBank = new Bank();
+        demirBank.deposit(10000);
         while (true) {
             try {
-                accountAmount.withDraw(6000);
-                accountAmount.printInfo();
-            } catch (LimitException e) {
-                System.out.println(e.getMessage());
+                demirBank.withDraw(6000);
+            } catch (LimitException le) {
+                System.out.println(le.getMessage());
                 try {
-                    accountAmount.withDraw(accountAmount.getAmount());
-                }catch (LimitException le){
-                    le.printStackTrace();
+                    demirBank.withDraw((int) demirBank.getAmount());
+                } catch (LimitException l) {
+                    l.printStackTrace();
                 }
                 break;
             }
-            System.out.println("Остаток: " + accountAmount.getAmount());
         }
-
     }
 }
